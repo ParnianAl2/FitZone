@@ -1,7 +1,12 @@
+import { Stack } from '@mui/material'
 import React from 'react'
 
 export default function Footer() {
   return (
-    <div>index</div>
+    <>
+      <Stack sx={{bgcolor:'white' , height:'100px'}}>
+        
+      </Stack>
+    </>
   )
 }
