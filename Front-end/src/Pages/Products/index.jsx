@@ -17,21 +17,18 @@ export default function Products() {
   })()
   },[])
   const allProducts = products?.map((e,index) => 
-    <Card key={index} sx={{ width: 470 , height: '550px'}}>
+    <Card key={index} sx={{ width: 470 , height: '560px'}}>
       <CardMedia className='category-card'
-          sx={{ height: '75%', 
+          sx={{ height: '73%', 
             objectFit: 'contain' 
           }}
           image={import.meta.env.VITE_BASE_URL+e.image[0].url}
           title={e.title}
         />
-      <CardContent  sx={{pt:'10px' , pl: '20px' , pb:'0px'}}>
-        <Typography gutterBottom variant="h5" component="div">
+      <CardContent  sx={{pt:'10px' , pl: '25px' , pb:'0px'}}>
+        <Typography gutterBottom variant="h5" component="div"sx={{mb:'0px'}}>
           {e.title}
         </Typography>
-        {/* <Typography variant="body2" sx={{ color: 'text.secondary' , pb: '10px' }}>
-          {e.description}
-        </Typography> */}
         <Typography component={'span'} 
         sx={{
           fontSize:'25px' ,
@@ -40,9 +37,9 @@ export default function Products() {
           ${e.price}
         </Typography>
       </CardContent>
-      <CardActions sx={{pl:'10px' , pt:'0px'}}>
-        <Button size="medium" sx={{textTransform: 'none' , fontSize: '18px' , fontWeight:'500' , wordSpacing:'-2px'}}>Add to cart</Button>
-        <Button size="medium">Learn More</Button>
+      <CardActions sx={{px:'25px' , pt:'8px' , display:'flex' , justifyContent:'space-between'}}>
+        <Button size="medium" variant="outlined">Learn More</Button>
+        <Button size="medium" variant="contained" sx={{textTransform: 'none' , fontSize: '18px' , fontWeight:'500' , wordSpacing:'-2px' , bgcolor:'#22C55E'}}>Add to cart</Button>
       </CardActions>
     </Card>
   ) 
