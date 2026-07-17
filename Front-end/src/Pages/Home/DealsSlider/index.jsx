@@ -9,10 +9,6 @@ import './style.css';
 export default function DealsSlider() {
     const  [slide,setSlide] = useState()
     useEffect(() => {
-        // (async () => {
-        //     const res = await fetchData("sliders?populate=*");
-        //     setSlide(res.data);
-        // })();
         (async ()  => {
             const res = await fetchData('products?populate=*&filters[Discount][$gt]=10');
             setSlide(res.data);
