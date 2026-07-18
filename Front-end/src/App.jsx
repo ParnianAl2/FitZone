@@ -14,8 +14,8 @@ import  Auth  from './Pages/Auth'
 import NotFound from './Pages/NotFound'
 import Container from '@mui/material/Container';
 export default function App() {
-  // const { token }  = useSelector(state => state.auth)
-  const token = "nibwieu"
+  const { token }  = useSelector(state => state.auth)
+  // const token = "nibwieu"
   return (
     <>
       {/* <Typography variant='h1' component={'h1'}>Hello world</Typography> */}
