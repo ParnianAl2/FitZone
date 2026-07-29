@@ -9,9 +9,12 @@ import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../Store/Slices/Cart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function Products() {
+  const navigate = useNavigate()
   const [products, setProducts] = useState()
+  const { token } = useSelector(state => state.auth)
   useEffect(() => {
     (async () => {
       const res = await fetchData('products?populate=*')
@@ -49,10 +52,16 @@ export default function Products() {
           <Button size="medium" variant="outlined" ><Link to={`/product-detail/${e.id}/${e.title}`} sx={{ color: "inherit", textDecoration: "none" }}>More</Link></Button>
           <Button size="medium" variant="contained" sx={{ textTransform: 'none', fontSize: '18px', fontWeight: '500', wordSpacing: '-2px', bgcolor: isInCart ? '#E01919' : '#22C55E' }}
             onClick={() => {
-              if (isInCart) {
-                dispatch(removeItem(e.id));
-              } else {
-                dispatch(addItem(e))
+              if (token) {
+                if (isInCart) {
+                  dispatch(removeItem(e.id));
+                } else {
+                  dispatch(addItem(e))
+                }
+              }else {
+                dispatch(clearCart());
+                localStorage.removeItem("cart");
+                navigate('/auth')
               }
             }}
           >{isInCart ? 'Remove from cart' : 'Add to cart'}</Button>

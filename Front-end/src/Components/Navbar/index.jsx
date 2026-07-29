@@ -9,7 +9,7 @@ import '../../App.css'
 export default function Navbar() {
   const { token } = useSelector(state => state.auth)
   // const token = "nibwieu"
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() 
   const isMobile = useMediaQuery('(max-width:700px)')
   return (
     <>
