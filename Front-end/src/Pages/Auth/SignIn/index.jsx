@@ -1,20 +1,36 @@
 import React, { useState } from 'react'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Button, Grid, Stack } from '@mui/material';
+import { Box, Button, Checkbox, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import IconButton from '@mui/material/IconButton';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-export default function SignIn({handlePageType}) {
-    const [showPass, setShowPass] = useState(false)      
+import useFormFields from '../../../Utils/useFormFields';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../Store/Slices/Auth';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+export default function SignIn({ handlePageType }) {
+    const [showPass, setShowPass] = useState(false)
+    const [fields, handleChange] = useFormFields()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(fields);
+        axios.post('http://localhost:1337/api/auth/local', fields)
+            .then(res => {
+                if (res.data.jwt) {
+                    alert('Login Successfully')
+                    dispatch(login({ user: res.data.user.username, token: res.data.jwt }))
+                    navigate("/");
+
+                }
+            }).catch(err => {
+                console.log(err.response.data.error.message);
+            })
     }
     return (
         <>
+            
             <Box
                 component="form"
                 onSubmit={handleSubmit}
@@ -29,14 +45,14 @@ export default function SignIn({handlePageType}) {
                 <Stack
                     sx={{
                         bgcolor: "rgb(255,255,255,5%)",
-                        width: { md: '70%', xs: '100%', sm: '90%' },
+                        width: { md: '65%', xs: '100%', sm: '90%' },
                         gap: '30px',
                         alignItems: 'center',
                         height: '440px',
                         borderRadius: '20px',
                         pt: '70px'
                     }}>
-                    <TextField id="outlined-basic" label="Username or Email" type='text' variant="outlined" color="primary" name='identifier'
+                    <TextField id="outlined-basic" label="Username or Email" type='text' variant="outlined" color="primary" name='identifier' required onChange={handleChange}
                         sx={{
                             width: '60%',
                             "& .MuiOutlinedInput-root": {
@@ -67,7 +83,7 @@ export default function SignIn({handlePageType}) {
                         }} />
                     <Stack sx={{ width: '60%' }}>
                         <Stack sx={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-                            <TextField id="outlined-basic" label="Password" type={showPass ? "text" : "password"} variant="outlined" color="primary" name='password'
+                            <TextField id="outlined-basic" label="Password" type={showPass ? "text" : "password"} variant="outlined" color="primary" name='password' required onChange={handleChange}
                                 sx={{
                                     width: '90%',
                                     "& .MuiOutlinedInput-root": {
@@ -95,13 +111,13 @@ export default function SignIn({handlePageType}) {
                                 {showPass ? <VisibilityOffIcon sx={{ fontSize: '30px' }} /> : <VisibilityIcon sx={{ fontSize: '30px' }} />}
                             </IconButton>
                         </Stack>
-                        <FormControlLabel label="Remember" control={<Checkbox sx={{ color: 'primary.main' }} />}
+                        {/* <FormControlLabel label="Remember" control={<Checkbox sx={{ color: 'primary.main' }} />}
                             sx={{ color: 'white' }}
-                        />
+                        /> */}
                     </Stack>
-                    <Stack sx={{ gap:'15px'}}>
+                    <Stack sx={{ gap: '15px' }}>
                         <Button variant="contained" size="large" type='submit' >Sign in</Button>
-                        <Button variant="text" size="large" onClick={handlePageType} >Create an Account</Button>
+                        <Button variant="text" size="large" onClick={handlePageType} sx={{ textTransform: "none" }} >Create an Account</Button>
                     </Stack>
                 </Stack>
             </Box >

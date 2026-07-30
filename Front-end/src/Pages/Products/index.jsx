@@ -52,16 +52,10 @@ export default function Products() {
           <Button size="medium" variant="outlined" ><Link to={`/product-detail/${e.id}/${e.title}`} sx={{ color: "inherit", textDecoration: "none" }}>More</Link></Button>
           <Button size="medium" variant="contained" sx={{ textTransform: 'none', fontSize: '18px', fontWeight: '500', wordSpacing: '-2px', bgcolor: isInCart ? '#E01919' : '#22C55E' }}
             onClick={() => {
-              if (token) {
-                if (isInCart) {
-                  dispatch(removeItem(e.id));
-                } else {
-                  dispatch(addItem(e))
-                }
-              }else {
-                dispatch(clearCart());
-                localStorage.removeItem("cart");
-                navigate('/auth')
+              if (isInCart) {
+                dispatch(removeItem(e.id));
+              } else {
+                dispatch(addItem(e))
               }
             }}
           >{isInCart ? 'Remove from cart' : 'Add to cart'}</Button>

@@ -8,7 +8,7 @@ import '../../App.css'
 
 export default function Navbar() {
   const { token } = useSelector(state => state.auth)
-  // const token = "nibwieu"
+  console.log(token);
   const dispatch = useDispatch() 
   const isMobile = useMediaQuery('(max-width:700px)')
   return (
@@ -31,17 +31,17 @@ export default function Navbar() {
             width: '100%',
             px: '70px'
           }}>
-          <Typography component={'h1'} sx={{ fontSize: '55px', color: '#FF3B30', fontFamily: '"Bebas Neue", sans-serif' }} className='Title'>FITZone</Typography>
+          <Typography component={'h1'} sx={{ fontSize: '55px', color: '#B7F000', fontFamily: '"Bebas Neue", sans-serif' }} className='Title'>FITZone</Typography>
           <Button variant='text' sx={{ textTransform: "none", fontSize: '17px' }}><Link to={'/'} style={{ color: '#FFFFFF' }}>Home</Link></Button>
           <Button variant='text' sx={{ textTransform: "none", fontSize: '17px' }}><Link to={'/products'} style={{ color: '#FFFFFF' }}>All products</Link></Button>
           <Button variant='text' sx={{ textTransform: "none", fontSize: '17px' }}><Link to={'/Cart'} style={{ color: '#FFFFFF' }}>My Cart</Link></Button>
           {token ?
-            <Button variant='contained' color='error' sx={{ marginLeft: "auto" }} onClick={() => dispatch(logout())}>
+            <Button variant='contained' color='error' sx={{ marginLeft: "auto" }} onClick={() => dispatch(logout())} size='large'>
               <Typography component={'span'} color='white' sx={{ fontWeight: '700' }}>Logout</Typography>
             </Button>
             :
             <Button variant='contained' >
-              <Link to={'/auth'} style={{ color: 'white', fontWeight: '700' }}>Sign in/Sign Out</Link>
+              <Link to={'/auth'} style={{ color: 'white', fontWeight: '700' }}>Sign in/Sign up</Link>
             </Button>
           }
         </Stack>

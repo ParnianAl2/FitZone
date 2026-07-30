@@ -21,7 +21,17 @@ export default function DealsSlider() {
     return (
         <>
         <Swiper
-        slidesPerView={3}
+        slidesPerView={1}
+        breakpoints={{
+          890: {
+            slidesPerView: 3,
+          },
+          660: {
+            slidesPerView: 2 ,
+          },
+        }}
+      
+        
         spaceBetween={20}
         grabCursor={true}
         pagination={{
