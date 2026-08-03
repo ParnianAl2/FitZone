@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from "../../Store/Slices/Cart";
 export default function ProductDetail() {
   const { id } = useParams()
+  console.log(id);
   const [productId, setProductId] = useState();
   const dispatch = useDispatch();
   const InCart = useSelector(state => state.cart.list);
@@ -15,7 +16,7 @@ export default function ProductDetail() {
     console.log("EFFECT FIRED, id =", id);
     (async () => {
       try {
-        const res = await fetchData(`products?filters[id][$eq]=13&populate=*`);
+        const res = await fetchData(`products?filters[id][$eq]=${id}&populate=*`);
         console.log("FULL RESPONSE:", res);
         setProductId(res.data[0]);
         console.log(productId);
@@ -45,9 +46,20 @@ export default function ProductDetail() {
           <Stack sx={{ width: '40%', height: '75%', gap: '40px', justifyContent: 'space-between' }}>
             <Typography component='h1' sx={{ color: 'white', fontSize: '33px' }}>{productId?.title}</Typography>
             <Typography component='h2' sx={{ color: 'white', fontSize: '20px', fontWeight: '200' }}>{productId?.description}</Typography>
-            <Stack sx={{ flexDirection: 'row' , justifyContent: 'space-around'}}>
-              <Typography component='h3' sx={{ fontSize: '29px', color: ' #3B82F6'}}>${productId?.price}</Typography>
-              <Button size="large" variant="contained" sx={{ textTransform: 'none', fontSize: '18px', fontWeight: '500', wordSpacing: '-2px', bgcolor: isInCart ? '#E01919' : '#22C55E' }}
+            <Stack sx={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+              <Stack>
+                {productId?.Discount > 0 ? <Typography sx={{ color: '#FF6B00' }}>Discount : {productId?.Discount}%</Typography> : null}
+                <Stack direction={'row'} sx={{gap: '17px' , alignItems:'center'}}>
+                  <Typography component='h3'
+                    sx={{
+                      fontSize: productId?.Discount >0 ? '22px' : '29px',
+                      color: productId?.Discount > 0 ? '#8F8C8C' : ' #00A6FF',
+                      textDecorationLine: productId?.Discount > 0 ? 'line-through' : 'none'
+                    }}>${productId?.price}</Typography>
+                  {productId?.Discount > 0 ? <Typography sx={{fontSize: '29px' , color:'#00A6FF'}}>${productId?.price - (productId?.price * productId.Discount / 100)}</Typography> : null}
+                </Stack>
+              </Stack>
+              <Button size="large" variant="contained" sx={{ height: '50px', textTransform: 'none', fontSize: '18px', fontWeight: '500', wordSpacing: '-2px', bgcolor: isInCart ? '#E01919' : '#22C55E' }}
                 onClick={() => {
                   if (isInCart) {
                     dispatch(removeItem(productId.id));

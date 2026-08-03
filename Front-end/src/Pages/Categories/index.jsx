@@ -42,7 +42,7 @@ export default function Categories() {
           <Typography component={'span'}
             sx={{
               fontSize: '25px',
-              color: '#3B82F6',
+              color: '#00A6FF',
             }}>
             ${e.price}
           </Typography>

@@ -40,7 +40,7 @@ export default function Products() {
           <Typography component={'span'}
             sx={{
               fontSize: '25px',
-              color: '#3B82F6',
+              color: '#00A6FF',
             }}>
             ${e.price}
           </Typography>
@@ -67,7 +67,8 @@ export default function Products() {
         sx={{
           gap: '30px',
           flexWrap: 'wrap',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          height: '5500px'
         }}>
         {allProducts}
       </Stack>
