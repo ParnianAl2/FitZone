@@ -10,11 +10,8 @@ import { Stack } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../Store/Slices/Cart";
 import { Link, useNavigate } from "react-router-dom";
-
 export default function Products() {
-  const navigate = useNavigate()
   const [products, setProducts] = useState()
-  const { token } = useSelector(state => state.auth)
   useEffect(() => {
     (async () => {
       const res = await fetchData('products?populate=*')
@@ -27,7 +24,7 @@ export default function Products() {
   const allProducts = products?.map((e, index) => {
     const isInCart = InCart.some(item => item.id === e.id);
     return (
-      <Card key={index} sx={{ width: 470, height: '560px' }}>
+      <Card key={index} sx={{ width: 470, height: '560px', borderRadius: '20px' }}>
         <CardMedia className='category-card'
           sx={{
             height: '73%',

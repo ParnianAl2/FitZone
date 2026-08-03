@@ -1,0 +1,5 @@
+.product-detail-image {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px ;
+}

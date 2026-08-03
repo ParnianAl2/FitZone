@@ -6,13 +6,23 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem } from "../../Store/Slices/Cart";
 export default function Cart() {
   const Items = useSelector(state => state.cart.list);
   const dispatch = useDispatch();
+  if (Items.length === 0) {
+    return (
+      <Box sx={{display: 'flex' , alignItems: 'center' , justifyContent: 'center' , margin: '20px'}}>
+        <Stack  sx={{ width: '40%', height: '100px', bgcolor: 'rgb(255,255,255,10%)' , alignItems: 'center' , justifyContent: 'center' ,borderRadius: '20px' }}>
+          <Typography sx={{color:'white' , fontSize:'22px' , wordSpacing:'5px'}}>Your Cart is Empty</Typography>
+        </Stack>
+      </Box>
+    )
+  }
   const listOfItems = Items?.map((e, index) =>
+
     <Card key={index}
       sx={{
         width: '1000px',
@@ -59,7 +69,7 @@ export default function Cart() {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <Button variant="contained" onClick={() => {dispatch(removeItem(e.id))}}
+      <Button variant="contained" onClick={() => { dispatch(removeItem(e.id)) }}
         sx={{ height: '55%', width: '5%', mr: ' 30px', my: 'auto', pl: '17px', bgcolor: '#E01919', borderRadius: '12px' }}>
         <DeleteIcon />
       </Button>

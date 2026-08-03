@@ -7,46 +7,45 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './style.css';
 export default function DealsSlider() {
-    const  [slide,setSlide] = useState()
+    const [slide, setSlide] = useState()
     useEffect(() => {
-        (async ()  => {
+        (async () => {
             const res = await fetchData('products?populate=*&filters[Discount][$gt]=10');
             setSlide(res.data);
         })();
-    },[])
+    }, [])
     console.log(slide);
-    const slides = slide?.map((e,index) => <SwiperSlide key = {index}>
-            <img src={import.meta.env.VITE_BASE_URL+ e?.image?.[0]?.url}/>
-        </SwiperSlide>)
+    const slides = slide?.map((e, index) => <SwiperSlide key={index}>
+        <img src={import.meta.env.VITE_BASE_URL + e?.image?.[0]?.url} />
+    </SwiperSlide>)
     return (
         <>
-        <Swiper
-        slidesPerView={1}
-        breakpoints={{
-          890: {
-            slidesPerView: 3,
-          },
-          660: {
-            slidesPerView: 2 ,
-          },
-        }}
-      
-        
-        spaceBetween={20}
-        grabCursor={true}
-        pagination={{
-          clickable: true,
-        }} 
-        autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-        }}
-        navigation={true}
-        modules={[Pagination , Autoplay , Navigation]}
-        className="DealsSlider"
-      >
-            {slides}
-        </Swiper>
+            <Swiper
+                slidesPerView={1}
+                breakpoints={{
+                    890: {
+                        slidesPerView: 3,
+                    },
+                    660: {
+                        slidesPerView: 2,
+                    },
+                }}
+
+                spaceBetween={20}
+                grabCursor={true}
+                pagination={{
+                    clickable: true,
+                }}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                navigation={true}
+                modules={[Pagination, Autoplay, Navigation]}
+                className="DealsSlider"
+            >
+                {slides}
+            </Swiper>
         </>
-  )
+    )
 }

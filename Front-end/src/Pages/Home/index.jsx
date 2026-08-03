@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Banner />
-      <Typography component={'h2'} sx={{fontSize:'38px' , height:'95px',display:'flex',alignItems:'center',fontWeight:'900'}} className='hotDeals'>HOT DEALS </Typography>
+      <Typography component={'h2'} sx={{fontSize:'40px' , height:'95px',display:'flex',alignItems:'center',fontWeight:'900' , margin: '20px'}} className='hotDeals'>HOT DEALS </Typography>
       <DealsSlider />
     </>
   )
