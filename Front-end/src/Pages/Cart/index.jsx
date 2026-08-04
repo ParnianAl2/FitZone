@@ -1,14 +1,9 @@
 import React from 'react'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea';
-import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Stack } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem } from "../../Store/Slices/Cart";
+
 export default function Cart() {
   const Items = useSelector(state => state.cart.list);
   const dispatch = useDispatch();

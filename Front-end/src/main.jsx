@@ -9,7 +9,7 @@ import "@fontsource/bebas-neue";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/FitZone">
       <Provider store={Store}>
         <App />
       </Provider>

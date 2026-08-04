@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography, useMediaQuery } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import fetchData from '../../Utils/FetchData';
@@ -26,24 +26,25 @@ export default function ProductDetail() {
     })();
   }, [id])
   console.log(productId);
+  const changeStyle = useMediaQuery('(max-width:1200px)')
   return (
     <>
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Box
           sx={{
             display: 'flex',
-            direction: 'row',
-            width: '70%',
-            height: '650px',
+            flexDirection: changeStyle ? 'column' :'row' ,
+            width: changeStyle ? '50%' : '70%',
+            height: changeStyle? '850px' : '650px',
             bgcolor: 'rgb(255,255,255,10%)',
             borderRadius: '15px',
             justifyContent: 'space-around',
             alignItems: 'center'
           }}>
-          <Stack sx={{ width: '40%', height: '80%' }}>
+          <Stack sx={{ width: changeStyle? '70%' : '40%', height: changeStyle? '50%' : '80%' , pt:changeStyle? '50px' : 'none'}}>
             <img src={import.meta.env.VITE_BASE_URL + productId?.image?.[0]?.url} alt="" sx={{ height: '100%' }} className='product-detail-image' />
           </Stack>
-          <Stack sx={{ width: '40%', height: '75%', gap: '40px', justifyContent: 'space-between' }}>
+          <Stack sx={{ width: changeStyle? '70%' : '40%', height: '75%', gap: changeStyle? '30px' : '40px', justifyContent: changeStyle? 'center' : 'space-between' }}>
             <Typography component='h1' sx={{ color: 'white', fontSize: '33px' }}>{productId?.title}</Typography>
             <Typography component='h2' sx={{ color: 'white', fontSize: '20px', fontWeight: '200' }}>{productId?.description}</Typography>
             <Stack sx={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>

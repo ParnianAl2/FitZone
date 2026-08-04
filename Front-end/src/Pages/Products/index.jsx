@@ -68,7 +68,6 @@ export default function Products() {
           gap: '30px',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          height: '5500px'
         }}>
         {allProducts}
       </Stack>

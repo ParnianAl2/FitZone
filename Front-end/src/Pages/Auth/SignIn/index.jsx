@@ -111,9 +111,6 @@ export default function SignIn({ handlePageType }) {
                                 {showPass ? <VisibilityOffIcon sx={{ fontSize: '30px' }} /> : <VisibilityIcon sx={{ fontSize: '30px' }} />}
                             </IconButton>
                         </Stack>
-                        {/* <FormControlLabel label="Remember" control={<Checkbox sx={{ color: 'primary.main' }} />}
-                            sx={{ color: 'white' }}
-                        /> */}
                     </Stack>
                     <Stack sx={{ gap: '15px' }}>
                         <Button variant="contained" size="large" type='submit' >Sign in</Button>

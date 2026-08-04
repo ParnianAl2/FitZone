@@ -26,7 +26,7 @@ export default function Categories() {
   const cards = categoryP?.map((e, index) => {
     const isInCart = InCart.some(item => item.id === e.id);
     return (
-      <Card key={index} sx={{ width: 470, height: '560px' }}>
+      <Card key={index} sx={{ width: 470, height: '560px' , borderRadius:'20px' }}>
         <CardMedia className='category-card'
           sx={{
             height: '73%',
