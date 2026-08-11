@@ -26,7 +26,7 @@ export default function ProductDetail() {
     })();
   }, [id])
   console.log(productId);
-  const changeStyle = useMediaQuery('(max-width:1200px)')
+  const changeStyle = useMediaQuery('(max-width:1100px)')
   return (
     <>
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -34,18 +34,18 @@ export default function ProductDetail() {
           sx={{
             display: 'flex',
             flexDirection: changeStyle ? 'column' :'row' ,
-            width: changeStyle ? '50%' : '70%',
-            height: changeStyle? '850px' : '650px',
+            width: changeStyle ? '90%' : '70%',
+            height: changeStyle? '950px' : '650px',
             bgcolor: 'rgb(255,255,255,10%)',
             borderRadius: '15px',
             justifyContent: 'space-around',
             alignItems: 'center'
           }}>
-          <Stack sx={{ width: changeStyle? '70%' : '40%', height: changeStyle? '50%' : '80%' , pt:changeStyle? '50px' : 'none'}}>
+          <Stack sx={{ width: changeStyle? '80%' : '40%', height: changeStyle? '70%' : '80%' , pt:changeStyle? '50px' : 'none'}}>
             <img src={import.meta.env.VITE_BASE_URL + productId?.image?.[0]?.url} alt="" sx={{ height: '100%' }} className='product-detail-image' />
           </Stack>
-          <Stack sx={{ width: changeStyle? '70%' : '40%', height: '75%', gap: changeStyle? '30px' : '40px', justifyContent: changeStyle? 'center' : 'space-between' }}>
-            <Typography component='h1' sx={{ color: 'white', fontSize: '33px' }}>{productId?.title}</Typography>
+          <Stack sx={{ width: changeStyle? '80%' : '40%', height: '75%', gap: changeStyle? '20px' : '40px', justifyContent: changeStyle? 'center' : 'space-between' }}>
+            <Typography component='h1' sx={{ color: 'white', fontSize: changeStyle ? '26px' : '33px' }}>{productId?.title}</Typography>
             <Typography component='h2' sx={{ color: 'white', fontSize: '20px', fontWeight: '200' }}>{productId?.description}</Typography>
             <Stack sx={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
               <Stack>

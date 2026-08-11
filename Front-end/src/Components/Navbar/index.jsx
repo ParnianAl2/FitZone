@@ -6,6 +6,8 @@ import "@fontsource/bebas-neue";
 import { Link } from 'react-router-dom'
 import '../../App.css'
 import MenuIcon from '@mui/icons-material/Menu';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 export default function Navbar() {
   const { token } = useSelector(state => state.auth)
   console.log(token);
@@ -38,10 +40,10 @@ export default function Navbar() {
     </Box>
   );
   const categoriesItems = [
-    {text:"Women" , path: "/categories/women"} , 
-    {text: 'Men' , path: '/categories/men'} , 
-    {text: 'Bags' , path: '/categories/bags'} ,
-    {text: 'Sport Shoes' , path: '/categories/sportShoes'}
+    { text: "Women", path: "/categories/women" },
+    { text: 'Men', path: '/categories/men' },
+    { text: 'Bags', path: '/categories/bags' },
+    { text: 'Sport Shoes', path: '/categories/sportShoes' }
   ]
   const Second_DrawerList = (
     <Box sx={{ width: 180 }} role="presentation" onClick={second_toggleDrawer(false)}>
@@ -73,7 +75,7 @@ export default function Navbar() {
             justifyContent: 'flex-start',
             alignItems: 'center',
             width: '100%',
-            px: isMobile ? '20px' : '70px'
+            px: { xs: 'none', sm: '20px' }
           }}>
           <Stack component={'menu'} sx={{ display: !isMobile ? 'none' : 'flex' }}>
             <Button onClick={Main_toggleDrawer(true)}><MenuIcon sx={{ fontSize: '50px' }} /></Button>
@@ -87,19 +89,19 @@ export default function Navbar() {
               {Main_DrawerList}
             </Drawer>
           </Stack>
-          <Typography component={'h1'} sx={{ fontSize: '55px', color: '#B7F000', fontFamily: '"Bebas Neue", sans-serif' }} className='Title'>FITZone</Typography>
+          <Typography component={'h1'} sx={{ fontSize: { xs: '40px', sm: '50px', md: '55px' }, color: '#B7F000', fontFamily: '"Bebas Neue", sans-serif' }} className='Title'>FITZone</Typography>
           <Stack direction={'row'} sx={{ display: isMobile ? 'none' : 'flex' }}>
             <Button variant='text' sx={{ textTransform: "none", fontSize: '17px' }}><Link to={'/'} style={{ color: '#FFFFFF' }}>Home</Link></Button>
             <Button variant='text' sx={{ textTransform: "none", fontSize: '17px' }}><Link to={'/products'} style={{ color: '#FFFFFF' }}>All products</Link></Button>
             <Button variant='text' sx={{ textTransform: "none", fontSize: '17px' }}><Link to={'/Cart'} style={{ color: '#FFFFFF' }}>My Cart</Link></Button>
           </Stack>
           {token ?
-            <Button variant='contained' color='error' sx={{ marginLeft: "auto" }} onClick={() => dispatch(logout())} size='large'>
-              <Typography component={'span'} color='white' sx={{ fontWeight: '700' }}>Logout</Typography>
+            <Button variant='contained' color='error' sx={{ marginLeft: "auto" }} onClick={() => dispatch(logout())} size={isMobile? 'small' : 'large'}>
+              <Typography component={'span'} color='white' sx={{ fontWeight: '700' }}>{isMobile ? <LogoutIcon /> : 'Logout'}</Typography>
             </Button>
             :
             <Button variant='contained' >
-              <Link to={'/auth'} style={{ color: 'white', fontWeight: '700' }}>Sign in/Sign up</Link>
+              <Link to={'/auth'} style={{ color: 'white', fontWeight: '700' }}>{isMobile ? <PersonIcon /> : 'Sign in/Sign up'} </Link>
             </Button>
           }
         </Stack>
@@ -128,7 +130,7 @@ export default function Navbar() {
               alignItems: 'center'
             }}>
             <Stack component={'menu'} sx={{ display: !isMobile ? 'none' : 'flex' }}>
-              <Button onClick={second_toggleDrawer(true)} sx={{color:'white'}}>Categories</Button>
+              <Button onClick={second_toggleDrawer(true)} sx={{ color: 'white' }}>Categories</Button>
               <Drawer open={categoryOpen} onClose={second_toggleDrawer(false)}
                 sx={{
                   "& .MuiDrawer-paper": {
